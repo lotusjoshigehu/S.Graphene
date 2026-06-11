@@ -1,29 +1,39 @@
-const { askAI } = require("../services/aiservices");
+require("dotenv").config();
+const { GoogleGenAI } = require("@google/genai");
 
-async function askQuestion(req, res) {
-  try {
-    const { question } = req.body;
+const genAI = new GoogleGenAI({
+    apiKey: process.env.GOOGLE_API_KEY
+});
 
-    if (!question) {
-      return res.status(400).json({
-        message: "Question required"
-      });
+async function askAI(question) {
+    try {
+        const prompt = `
+Answer the user's question in clean HTML.
+
+Rules:
+- Use only h2, h3, p, ul, li, strong.
+- Do not use markdown.
+- Do not use ### headings.
+- Do not use **bold** syntax.
+- Do not use * bullets.
+- Return ONLY HTML.
+- Make the answer easy to read.
+
+Question:
+${question}
+`;
+
+        const response = await genAI.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt
+        });
+
+        return response.text;
+
+    } catch (error) {
+        console.error("Gemini Error:", error);
+        throw error;
     }
-
-    const answer = await askAI(question);
-
-    res.json({ answer });
-
-  } catch (error) {
-    console.error("AI Error:", error);
-
-    res.status(500).json({
-      message: "AI failed",
-      error: error.message
-    });
-  }
 }
 
-module.exports = {
-  askQuestion
-};
+module.exports = { askAI };
