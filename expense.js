@@ -52,7 +52,7 @@ rowsSelect.value = rowsPerPage;
 
 loadExpenses();
 
-fetch(`http://localhost:3000/user/status/${email}`)
+fetch(`https://s-graphene.onrender.com/user/status/${email}`)
 .then(res => res.json())
 .then(data => {
     if (data.isPremium) {
@@ -64,7 +64,7 @@ fetch(`http://localhost:3000/user/status/${email}`)
 });
 
 async function loadExpenses() {
-    const res = await fetch(`http://localhost:3000/expense/${email}`);
+    const res = await fetch(`https://s-graphene.onrender.com/expense/${email}`);
     expenses = await res.json();
     filteredExpenses = [...expenses];
     renderPage();
@@ -134,7 +134,7 @@ expenseForm.addEventListener("submit", async e => {
         return;
     }
 
-    await fetch("http://localhost:3000/expense", {
+    await fetch("https://s-graphene.onrender.com/expense", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -153,7 +153,7 @@ expenseForm.addEventListener("submit", async e => {
 });
 
 async function deleteExpense(id) {
-    await fetch(`http://localhost:3000/expense/${id}`, {
+    await fetch(`https://s-graphene.onrender.com/expense/${id}`, {
         method: "DELETE"
     });
 
@@ -228,7 +228,7 @@ function drawChart() {
 }
 
 leaderboardBtn.addEventListener("click", async () => {
-    const res = await fetch("http://localhost:3000/premium/showleaderboard");
+    const res = await fetch("https://s-graphene.onrender.com/premium/showleaderboard");
     const data = await res.json();
 
     leaderboardList.innerHTML = "";
@@ -243,7 +243,7 @@ leaderboardBtn.addEventListener("click", async () => {
 const cashfree = Cashfree({ mode: "sandbox" });
 
 premiumBtn.addEventListener("click", async () => {
-    const res = await fetch("http://localhost:3000/create-order", {
+    const res = await fetch("https://s-graphene.onrender.com/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })
@@ -259,13 +259,13 @@ premiumBtn.addEventListener("click", async () => {
 
 downloadBtn.addEventListener("click", () => {
     window.location.href =
-        `http://localhost:3000/expense/download/${email}`;
+        `https://s-graphene.onrender.com/expense/download/${email}`;
 });
 
 askAiBtn.addEventListener("click", async () => {
     if (!aiQuestion.value) return;
 
-    const res = await fetch("http://localhost:3000/ai/ask", {
+    const res = await fetch("https://s-graphene.onrender.com/ai/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: aiQuestion.value })
