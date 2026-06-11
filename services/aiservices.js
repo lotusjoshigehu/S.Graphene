@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 const { GoogleGenAI } = require("@google/genai");
 
@@ -7,8 +6,8 @@ const genAI = new GoogleGenAI({
 });
 
 async function askAI(question) {
-
-    const prompt = `
+    try {
+        const prompt = `
 Answer the user's question in clean HTML.
 
 Rules:
@@ -24,13 +23,17 @@ Question:
 ${question}
 `;
 
-    const response = await genAI.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: prompt
-    });
+        const response = await genAI.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt
+        });
 
-    return response.text;
+        return response.text;
+
+    } catch (error) {
+        console.error("Gemini Error:", error);
+        throw error;
+    }
 }
 
 module.exports = { askAI };
-
