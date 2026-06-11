@@ -4,7 +4,7 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
-
+const PORT = process.env.PORT || 3000;
 
 const sequelize = require("./connection/dbconnection");
 const authController = require("./controllers/authController");
@@ -38,7 +38,9 @@ Order.belongsTo(User);
 User.hasMany(ForgotPasswordRequest);
 ForgotPasswordRequest.belongsTo(User);
 
-sequelize.sync();
+sequelize.sync()
+  .then(() => console.log("Database synced"))
+  .catch(err => console.log(err));
 
 app.post("/signup", authController.signup);
 app.post("/login", authController.login);
@@ -61,6 +63,6 @@ app.post("/create-order", paymentController.createPremiumOrder);
 app.get("/payment-success", paymentController.paymentSuccess);
 app.post("/password/forgotpassword", passwordController.forgotPassword);
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
