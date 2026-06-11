@@ -1,18 +1,8 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("testdb", "root", "lotus", {
-    host: "localhost",
-    dialect: "mysql"
+const sequelize = new Sequelize({
+    dialect: "sqlite",
+    storage: "./database.sqlite"
 });
 
-(async () => {
-    try {
-        await sequelize.authenticate();
-        console.log("Database connected successfully");
-    } catch (error) {
-        console.log("DB Error:", error)
-    }
-})();
-
 module.exports = sequelize;
-
