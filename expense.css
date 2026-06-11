@@ -1,0 +1,230 @@
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    padding:20px;
+}
+
+/* Heading */
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+h2{
+    margin-bottom:15px;
+    color:#444;
+}
+
+/* Card */
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Form */
+
+form{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+input,
+select{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    min-width:180px;
+}
+
+/* Buttons */
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+button:disabled{
+    background:gray;
+    cursor:not-allowed;
+}
+
+/* Summary */
+
+#totalSpent,
+#highestExpense{
+    font-size:18px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+#categorySummary{
+    margin-top:10px;
+}
+
+#categorySummary p{
+    margin:5px 0;
+}
+
+/* Table */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    background:white;
+}
+
+thead{
+    background:#2563eb;
+    color:white;
+}
+
+th,
+td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+tr:hover{
+    background:#eef2ff;
+}
+
+/* Pagination */
+
+.pagination{
+    margin-top:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+/* Chart */
+
+#expenseChart{
+    max-width:700px;
+    margin:auto;
+}
+
+/* Premium */
+
+#premiumMessage{
+    color:green;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+/* Leaderboard */
+
+#leaderboard{
+    margin-top:15px;
+}
+
+#leaderboard li{
+    list-style:none;
+    background:#f3f4f6;
+    padding:10px;
+    margin-bottom:5px;
+    border-radius:5px;
+}
+
+/* AI Section */
+
+#aiQuestion{
+    width:70%;
+    padding:10px;
+}
+
+#aiAnswer{
+    margin-top:15px;
+    padding:15px;
+    background:white;
+    border-radius:10px;
+    line-height:1.6;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+#aiAnswer h1,
+#aiAnswer h2,
+#aiAnswer h3{
+    margin:10px 0;
+    color:#2563eb;
+}
+
+#aiAnswer ul{
+    padding-left:20px;
+}
+
+#aiAnswer li{
+    margin:5px 0;
+}
+
+#aiAnswer p{
+    margin:10px 0;
+}
+
+/* Download */
+
+#downloadLink{
+    margin-top:10px;
+}
+
+#downloadLink a{
+    text-decoration:none;
+    color:#2563eb;
+    font-weight:bold;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    form{
+        flex-direction:column;
+    }
+
+    input,
+    select,
+    button{
+        width:100%;
+    }
+
+    table{
+        display:block;
+        overflow-x:auto;
+    }
+
+    #aiQuestion{
+        width:100%;
+    }
+}
