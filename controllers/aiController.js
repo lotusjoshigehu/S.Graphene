@@ -8,7 +8,11 @@ async function askQuestion(req, res) {
     const answer = await askAI(question);
     res.json({ answer });
   } catch {
-    res.status(500).json({ message: "AI failed" });
+    console.error("AI Error:", error);
+  res.status(500).json({
+    message: "AI failed",
+    error: error.message
+  });
   }
 }
 
