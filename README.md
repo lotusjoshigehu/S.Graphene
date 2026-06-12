@@ -153,7 +153,7 @@ Request Body:
 
 ```json
 {
-  "email": "john@example.com",
+  "email": "joshikamal626@gmail.com",
   "amount": 100,
   "category": "Food",
   "date": "2026-06-11",
