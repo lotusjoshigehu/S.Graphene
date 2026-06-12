@@ -262,21 +262,5 @@ downloadBtn.addEventListener("click", () => {
         `https://s-graphene.onrender.com/expense/download/${email}`;
 });
 
-askAiBtn.addEventListener("click", async () => {
-    if (!aiQuestion.value) return;
 
-    const res = await fetch("https://s-graphene.onrender.com/ai/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: aiQuestion.value })
-    });
-
-    const data = await res.json();
-    aiAnswer.innerHTML = data.answer;
-});
-
-
-if (!localStorage.getItem("loggedIn")) {
-    window.location.href = "login.html";
-}
 
