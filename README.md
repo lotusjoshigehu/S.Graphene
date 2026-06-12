@@ -49,7 +49,7 @@ https://s-graphene.onrender.com
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/lotusjoshigehu/S.Graphene.git
 cd Expense-Tracker
 ```
 
@@ -59,12 +59,6 @@ cd Expense-Tracker
 npm install
 ```
 
-### Create .env File
-
-```env
-CASHFREE_APP_ID=your_cashfree_app_id
-CASHFREE_SECRET_KEY=your_cashfree_secret_key
-```
 
 ### Start Application
 
@@ -94,9 +88,9 @@ Request Body:
 
 ```json
 {
-  "name": "John",
-  "email": "john@example.com",
-  "password": "123456"
+  "name": "Kamal",
+  "email": "joshikamal626@gmail.com",
+  "password": "12345"
 }
 ```
 
@@ -118,8 +112,8 @@ Request Body:
 
 ```json
 {
-  "email": "john@example.com",
-  "password": "123456"
+  "email": "joshikamal626@gmail.com",
+  "password": "12345"
 }
 ```
 
