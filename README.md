@@ -257,13 +257,11 @@ S.Graphene/
 
 ## Next Steps
 
-* Implement JWT authentication.
-* Add expense editing UI.
-* Improve AI assistant with spending analytics.
+* Add attractive UI.
+* Adding AI assistant with spending analytics.
 * Add monthly and yearly reports.
 * Add recurring expense support.
 * Add budget planning and alerts.
 * Add user profile management.
 * Add dark mode support.
-* Add advanced charts and dashboards.
 * Migrate from SQLite to PostgreSQL for production scalability.
