@@ -9,7 +9,7 @@ Expense Tracker is a full-stack web application that helps users manage their da
 ## Live Demo Links
 
 Frontend (Netlify):
-https://expense-tracker-sgraphene.netlify.app/
+https://sgraphene-expense-tracker.netlify.app/
 
 Backend (Render):
 https://s-graphene.onrender.com
