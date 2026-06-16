@@ -1,6 +1,6 @@
 
 if (!localStorage.getItem("loggedIn")) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 const email = localStorage.getItem("userEmail");
@@ -33,22 +33,18 @@ const leaderboardList = document.getElementById("leaderboard");
 const downloadBtn = document.getElementById("downloadBtn");
 const downloadLink = document.getElementById("downloadLink");
 
-const askAiBtn = document.getElementById("askAiBtn");
-const aiQuestion = document.getElementById("aiQuestion");
-const aiAnswer = document.getElementById("aiAnswer");
 
 let expenses = [];
 let filteredExpenses = [];
 let currentPage = 1;
 let chart;
+let editId = null;
 
 const formatter = new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR"
 });
 
-let rowsPerPage = Number(localStorage.getItem("rowsPerPage")) || 10;
-rowsSelect.value = rowsPerPage;
 
 loadExpenses();
 
@@ -64,13 +60,27 @@ fetch(`https://s-graphene.onrender.com/user/status/${email}`)
 });
 
 async function loadExpenses() {
-    const res = await fetch(`https://s-graphene.onrender.com/expense/${email}`);
+    const res = await fetch(`https://s-graphene.onrender.com/expense/${email}`);//get request
     expenses = await res.json();
     filteredExpenses = [...expenses];
     renderPage();
     updateSummary();
     drawChart();
 }
+
+function editExpense(id) {
+
+    const expense =
+        expenses.find(e => e.id === id);
+
+    amount.value = expense.amount;
+    category.value = expense.category;
+    expenseDate.value = expense.date;
+    note.value = expense.note;
+
+    editId = id;
+}
+window.editExpense = editExpense;
 
 function renderPage() {
     table.innerHTML = "";
@@ -87,6 +97,9 @@ function renderPage() {
             <td>${e.date}</td>
             <td>${e.note || "-"}</td>
             <td>
+               <button onclick="editExpense(${e.id})">
+                    Edit
+               </button>
                 <button onclick="deleteExpense(${e.id})">
                     Delete
                 </button>
@@ -121,6 +134,9 @@ rowsSelect.addEventListener("change", () => {
     renderPage();
 });
 
+let rowsPerPage = Number(localStorage.getItem("rowsPerPage")) || 10;
+rowsSelect.value = rowsPerPage;
+
 expenseForm.addEventListener("submit", async e => {
     e.preventDefault();
 
@@ -134,22 +150,47 @@ expenseForm.addEventListener("submit", async e => {
         return;
     }
 
-    await fetch("https://s-graphene.onrender.com/expense", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email,
-            amount: amount.value,
-            category: category.value,
-            date: expenseDate.value,
-            note: note.value
-        })
-    });
+    if (editId) {
 
-    expenseForm.reset();
-    loadExpenses();
+    await fetch(
+        `https://s-graphene.onrender.com/expense/${editId}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                amount: amount.value,
+                category: category.value,
+                date: expenseDate.value,
+                note: note.value
+            })
+        }
+    );
+
+    editId = null;
+
+} else {
+
+    await fetch(
+        "https://s-graphene.onrender.com/expense",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                amount: amount.value,
+                category: category.value,
+                date: expenseDate.value,
+                note: note.value
+            })
+        }
+    );
+}
+expenseForm.reset();
+loadExpenses();
 });
 
 async function deleteExpense(id) {
@@ -235,7 +276,7 @@ leaderboardBtn.addEventListener("click", async () => {
 
     data.forEach(user => {
         const li = document.createElement("li");
-        li.textContent = `${user.name} - ₹${user.totalExpense}`;
+        li.textContent = `${user.name} => ₹${user.totalExpense}`;
         leaderboardList.appendChild(li);
     });
 });
@@ -261,6 +302,9 @@ downloadBtn.addEventListener("click", () => {
     window.location.href =
         `https://s-graphene.onrender.com/expense/download/${email}`;
 });
+
+
+
 
 
 
