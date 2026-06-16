@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
@@ -23,6 +24,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(compression());
+app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 User.hasMany(Expense);
@@ -33,7 +36,8 @@ Order.belongsTo(User);
 
 
 sequelize.sync()
-  
+
+
 app.post("/signup", authController.signup);
 app.post("/login", authController.login);
 app.get("/user/status/:email", authController.userStatus);
