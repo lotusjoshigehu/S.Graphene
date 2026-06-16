@@ -34,9 +34,7 @@ Order.belongsTo(User);
 
 
 sequelize.sync()
-  .then(() => console.log("Database synced"))
-  .catch(err => console.log(err));
-
+  
 app.post("/signup", authController.signup);
 app.post("/login", authController.login);
 app.get("/user/status/:email", authController.userStatus);
